@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <h2>Infinity scroll in AngularJS</h2>
+    @*The ng-app directive tells AngularJS that this is the root element of the AngularJS application.
+    All AngularJS applications must have a root element.
+    You can only have one ng-app directive in your HTML document. If more than one ng-app directive appears, the first appearance will be used.*@
+
+    @*AngularJS applications are controlled by controllers.
+    The ng-controller directive defines the application controller.*@
+
+    @*The ng-controller="InfinityScrollController" attribute is an AngularJS directive. It defines a controller.
+    The "InfinityScrollController" function is a JavaScript function.*@
+    <div ng-app="myApp" ng-controller="InfinityScrollController">
+        <div style="position:relative">
+            @*The ngShow directive shows or hides the given HTML element based on the expression provided to the ngShow attribute.*@ 
+            <span ng-show="IsLoading" class="loading">Loading...</span>
+            @*AngularJS lets you extend HTML with new attributes called Directives.*@
+            <div infinityscroll="NextPage()" style="height:400px; overflow:auto;">
+                <table class="table table-responsive table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Country</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*The ng-repeat directive repeats a set of HTML, a given number of times. The set of HTML will be repeated once per item in a collection.
+                        The collection must be an array or an object. Note: Each instance of the repetition is given its own scope, which consist of the current item.
+                        If you have an collection of objects, the ng-repeat directive is perfect for making a HTML table, displaying one table row for each object, and one table data for each object property.*@ 
+                        @*<element ng-repeat="expression"></element>*@
+                         <tr ng-repeat="emp in EmployeeList">
+                            <td>{{emp.FirstName}} {{emp.LastName}}</td>
+                            <td>{{emp.EmailID}}</td>
+                            <td>{{emp.Country}}</td>
+                            <td>{{emp.City}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* JS *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+@*In larger applications, it is common to store controllers in external files.*@
+<script src="~/Scripts/myApp.js"></script>
+@* CSS *@
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<style type="text/css">
+    /*Loading panel css*/
+    .loading {
+        position: absolute;
+        left: 48%;
+        top: 48%;
+        display: block;
+        padding: 5px;
+        background-color: yellow;
+        color: red;
+        border: 1px solid;
+        margin: 0 auto;
+    }
+</style>
